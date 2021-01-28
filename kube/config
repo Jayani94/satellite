@@ -1,0 +1,30 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1ERXlPREV4TURrME5Wb1hEVE14TURFeU5qRXhNRGswTlZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTUg2CjBuUjM2bHZyS203US85TWY1c0lpdmVRM3pSVmtucUhvVEQrVTJLTDdUTjBLVWlnd2MwL0JQSUwvUVZCWWVURjgKVzQyNFVuOUJvTFlUQnBPb2dSTUp2Nk5jdHdQYk5sMmZZTmlQYUNpMno1RXV1L2lRdXp1U2JhUGhMYUkxRkIvcQoxM0kxTEd6WHZ2MHZCVko1eHJmUlhZbU44TGN5Wm40cm5YZWh6MUZHUUF1bFZ3L2xnTHFlOHNXNzJPLzVDT1h4CjdmZkRjbytLVWxMVEs1bnJZTk45S1oxYlhOYmIrYWFVc2hMT0d2L0Nqb2tpS3h3czU1c3lxRmxOeGFuTTkvcVAKOTRpbVg1dVp2UGVMSTBHeXM2MTNwUUowWnlYdmZiLzFwLzhvbXhjb0FCaDA2cVppcHNMa0ZnMERjU2JDclQwUwpvOUJSdlpMcUY0R1o2Y0JTS29NQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFCZ1lVWllFSndSNXpwSVVJQVFwQ1hTc293c2IKc2ZHcXk4bkpVcHlZb1Z1Q1hLZTdHdVYwV05zY3E3ZG9ndnFURDNSRkxObEZGMHlOL005K29ZSEJXNzVvd1IyNwp5MEdSUThvNUlnUWJ1SHNHWHcxVjVla2JLY0dFUFF6Y0RPZ3Nna0xCZmhCb2tTMmg1Q085OENrR085UERtdjhxClVCZ0RlK3hnNkZGNFBOUmZkaHNYWnpWU1l2R2lldFQxK3gwL2x0aWdJVjhDcWZIUlBpRVlBMEh0dTcrYkxxeDMKb3RFU1JtWk1sK2JQTkZTbHg4STI4U25oTzNmRU1zT3FIY3RpMG9CN0ZjeS9IZ0dRZGVxeFhNaEgxM09NeXpIOAp5UUFGaS9Ya3FGclArY2N5SGI0NVFjMlh1QXFHWE5UaW1ha1gzaThGMW16RGVxR1FtWTBXak0wREg0az0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://BB828291F2C9774264FD6A15E424642D.gr7.us-west-2.eks.amazonaws.com
+  name: cw-cluster.us-west-2.eksctl.io
+contexts:
+- context:
+    cluster: cw-cluster.us-west-2.eksctl.io
+    user: iam-root-account@cw-cluster.us-west-2.eksctl.io
+  name: iam-root-account@cw-cluster.us-west-2.eksctl.io
+current-context: iam-root-account@cw-cluster.us-west-2.eksctl.io
+kind: Config
+preferences: {}
+users:
+- name: iam-root-account@cw-cluster.us-west-2.eksctl.io
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1alpha1
+      args:
+      - eks
+      - get-token
+      - --cluster-name
+      - cw-cluster
+      - --region
+      - us-west-2
+      command: aws
+      env:
+      - name: AWS_STS_REGIONAL_ENDPOINTS
+        value: regional

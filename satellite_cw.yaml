@@ -1,0 +1,83 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: spacexiit
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: spacexiit
+  name: satellite-deploy
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: satellite-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: satellite-app
+    spec:
+      containers:
+      - image: 575994/satellite-service:main
+        imagePullPolicy: Always
+        name: satellite-app
+        ports:
+        - containerPort: 8089
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: spacexiit
+  name: satellite-service
+spec:
+  ports:
+    - port: 8089
+      targetPort: 8089
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: satellite-app
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: spacexiit
+  name: orbit-deploy
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: orbit-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: orbit-app
+    spec:
+      containers:
+      - image: 575994/orbit-service:main
+        imagePullPolicy: Always
+        name: orbit-app
+        ports:
+        - containerPort: 8088
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: spacexiit
+  name: orbit-service
+spec:
+  ports:
+    - port: 8088
+      targetPort: 8088
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: orbit-app
+  type: LoadBalancer
+status:
+  loadBalancer: {}
