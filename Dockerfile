@@ -9,6 +9,6 @@ RUN mvn -f /usr/src/app/pom.xml clean package
 # Package stage
 #
 FROM openjdk:15
-COPY --from=build /usr/src/app/target/*.jar /usr/local/lib/user-mysql.jar
+COPY --from=build /usr/src/app/target/user-mysql.jar /usr/local/lib/user-mysql.jar
 EXPOSE 8089
 ENTRYPOINT ["java","-jar","/usr/local/lib/user-mysql.jar"]
